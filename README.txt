@@ -2,3 +2,10 @@
 TPD Controller
 The TPD Controller linearly ramps and holds the temperature of a sample through the use of a closed-loop control.  This involves measuring the temperature of the sample with a pyrometer, calculating the temperature error, and heating the sample resistively using a current calculated by a PID algorithm.  Data about time and temperature are recorded so that the temperature schedule can be compared with RGA data to perform temperature programmed desorptiion.
 
+==User Input==
+At any time, the "Experiment Setup" metadata can be changed.  Before the sample is heated, the hardware setup, PID tuning parameters, and temperature schedule must be configured.  These cannot be changed once the "RUN" button is pressed, until the run is ended.  The values for the temperature, current, voltage, and power limits cannot be set above the maximum value shown, or below 0.
+
+==Heating the Sample==
+Once the hardware parameters are entered and the experiment is physically set up, the "RUN" button can be pressed to start heating the sample.  As long as there are no errors connecting to the DAQ board and the power supply, the PID algorithm will immediately begin running and the sample will heat.  A new temperature reading will be obtained, the PID algorithm will run, and a new current will be outputted to the power supply every 50 ms.  In addition, readings of actual current and voltage outputted by the power supply are read.  At every 50 ms interval, date, elapsed time [s], temperature setpoint [C], current setpoint [A], sample temperature [C], current [A], and voltage [V] are recorded.
+
+At any time, the "STOP" button can be pressed to stop the heating.  The only restriction actually imposed on the system by the limits selected in "Hardware Setup" is the current outputted by the power supply.  If the value for current calculated by the PID algorithm is higher than the maximum current or lower than 0, the value will be coerced into the acceptable range.  The indicators to the left of the 

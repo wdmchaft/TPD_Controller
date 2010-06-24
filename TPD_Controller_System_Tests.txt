@@ -1,0 +1,207 @@
+2010.06.23 16:45
+TPD Controller System Tests
+
+1. Check wire connection with sample.
+	1.1. Measure resistance between the two leads that contact the sample.  Should be on the order of ohms.
+	1.2. Measure resistance between each lead and ground.  Should be at least kilohms.
+2. Pass Current through sample.
+	2.1. Connect power supply leads to sample wires.
+	2.2. Connect thermocouple leads to temperature controller.
+	2.3. Mount and connect Mikron pyrometer.
+	2.3. Pass 1 A of Current through sample for 20 s.
+	2.4. Measure voltage across sample to get an idea of approximate resistance.  Should be consistant with resistance found in 1.1.
+	2.5. Verify that temperature is being measured by the temperature controller and the pyrometer.  They should be consistant with eachother.
+3. Test computer connection with power supply, temperature controller, and DAQ_Board.
+	3.1. Start TPD_Controller.vi.
+	3.2. Disconnect power supply from sample.
+	3.3. Set parameters:	
+		Max Current = 4 A
+		Max Voltage = 4 V
+		Max Temperature = 50 C
+		Kc = .5
+		Ti =  0
+		Td = 0
+		Temperature Schedule:	
+			0 s, 10 C
+			20 s, 50 C
+	3.4. Begin run
+	3.5. Verify that computer is communicating with DAQ board, temperature controller, and power supply.
+	3.6. Reconnect power supply to the sample after the run is completed.
+4. Run and tune simple P closed-loop controller.
+	4.1. Set parameters:	
+		Max Current = 2 A
+		Max Voltage = 20 V
+		Max Temperature = 800 C
+		Kc = .002
+		Ti =  0
+		Td = 0
+		Temperature Schedule:	
+			0 s, 500 C
+			300 s, 500 C
+	4.2. Wait for sample to cool below 200 C.
+	4.3. Begin run
+	4.4. Observe behaivior of the control loop.
+		The temperature should not oscilate or take too long to reach the setpoint.
+		There should be some amount of droop (steady state difference between setpoint and measured temperature).
+		The current and voltage should not be maxing out.
+		The temperature should not overshoot the max temperature.
+	4.5. End run if system equibrilates.
+	4.5. Save data.
+	4.6. Repeat test 4, lowering Kc if temperature oscillates, and raising Kc if temperature takes too long to reach setpoint (change Kc by factors of 2).  Find lowest value of Kc at which the system oscillates.  This value divided by 2 is the tuned value of Kc for this setup.
+5. Run and tune PI closed-loop controller.
+	5.1. Set parameters:	
+		Max Current = 2 A
+		Max Voltage = 20 V
+		Max Temperature = 800 C
+		Kc = found in test 4
+		Ti =  Oscillation period measured in step 4, in minutes
+		Td = 0
+		Temperature Schedule:	
+			0s, 500 C
+			300s, 500 C
+	5.2. Wait for sample to cool below 200 C.
+	5.3. Begin run.
+	5.4. Observe behavior of the control loop.
+		Measured temperature should not oscillate or take too long to reach the setpoint.
+		The current and voltage should not be maxing out.
+		The temperature should not overshoot the max temperature.
+	5.5. End run if system equibrilates.
+	5.6. Save data.
+	5.7. Repeat entire test, raising Ti if there is oscillation, lowering Ti if the temperature takes too long to reach the setpoint (change Ti by factors of 2).  Find value of Ti that balances overshoot with time taken to reach setpoint.
+6. Run and tune PID closed-loop controller.
+	6.1. Set parameters:	
+		Max Current = 2 A
+		Max Voltage = 20 V
+		Max Temperature = 800 C
+		Kc = found in step 4
+		Ti =  found in step 5
+		Td = (1/8)Ti
+		Temperature Schedule:	
+			0s, 500 C
+			300s, 500 C
+	6.2. Wait for sample to cool to below 200 C.
+	6.3. Begin run.
+	6.4. Observe behavior of control loop.
+		Is the temperature control better or worse than the last run?
+	6.5. End run if system equibrilates.
+	6.6. Save data.
+	6.7. Repeat entire test, doubling or halving Td to minimize overshoot and amount of time to reach setpoint.
+7. Run PID controller with positive temperature ramp (50C/min).
+	7.1. Set parameters:	
+		Max Current = 2 A
+		Max Voltage = 20 V
+		Max Temperature = 800 C
+		Kc = found in test 4
+		Ti =  found in test 5
+		Td = found in test 6
+		Temperature Schedule:	
+			0s, 400 C
+			60s, 400 C
+			120s, 450 C
+	7.2. Wait for temperature to cool below 200 C.
+	7.3. Begin run.
+	7.4. Observe behavior of control loop.
+		Measured temperature should settle on 400C during the first 60s, and then stay within a few C of the setpoint during the ramp.
+	7.5. Save data.
+8. Run PID controller with positive temperature ramp (100C/min).
+	8.1. Set parameters:	
+		Max Current = 2 A
+		Max Voltage = 20 V
+		Max Temperature = 800 C
+		Kc = found in test 4
+		Ti =  found in test 5
+		Td = found in test 6
+		Temperature Schedule:	
+			0s, 400 C
+			60s, 400 C
+			120s, 500 C
+	8.2. Wait for temperature to cool below 200 C.
+	8.3. Begin run.
+	8.4. Observe behavior of control loop.
+		Measured temperature should settle on 400C during the first 60s, and then stay within a few C of the setpoint during the ramp.
+	8.5. Save data.
+9. Run PID controller with positive temperature ramp (200C/min)
+	9.1. Set parameters:	
+		Max Current = 2 A
+		Max Voltage = 20 V
+		Max Temperature = 800 C
+		Kc = found in test 4
+		Ti =  found in test 5
+		Td = found in test 6
+		Temperature Schedule:	
+			0s, 300 C
+			60s, 300 C
+			120s, 500 C
+	9.2. Wait for temperature to cool below 200C.
+	9.3. Begin run.
+	9.4. Observe behavior of control loop.
+		Measured temperature should settle on 400C during the first 60s, and then stay within a few C of the setpoint during the ramp.
+	9.5. Save data.
+10. Run PID controller with positive temperature ramp (300C/min)
+	10.1. Set parameters:	
+		Max Current = 2 A
+		Max Voltage = 20 V
+		Max Temperature = 800 C
+		Kc = found in test 4
+		Ti =  found in test 5
+		Td = found in test 6
+		Temperature Schedule:	
+			0s, 200 C
+			60s, 200 C
+			120s, 500 C
+	10.2. Wait for temperature to cool below 200C.
+	10.3. Begin run.
+	10.4. Observe behavior of control loop.
+		Measured temperature should settle on 400C during the first 60s, and then stay within a few C of the setpoint during the ramp.
+	10.5. Save data.
+11. Run PID controller with negative temperature ramp (50C/min)
+	11.1. Set parameters:	
+		Max Current = 2 A
+		Max Voltage = 20 V
+		Max Temperature = 800 C
+		Kc = found in test 4
+		Ti =  found in test 5
+		Td = found in test 6
+		Temperature Schedule:	
+			0s, 500 C
+			60s, 500 C
+			120s, 450 C
+	11.2. Wait for temperature to cool below 200C.
+	11.3. Begin run.
+	11.4. Observe behavior of control loop.
+		Measured temperature should settle on 500C during the first 60s, and then stay within a few C of the setpoint during the ramp.
+	11.5. Save data.
+12. Run PID controller with negative temperature ramp (100C/min)
+	12.1. Set parameters:	
+		Max Current = 2 A
+		Max Voltage = 20 V
+		Max Temperature = 800 C
+		Kc = found in test 4
+		Ti =  found in test 5
+		Td = found in test 6
+		Temperature Schedule:	
+			0s, 500 C
+			60s, 500 C
+			120s, 400 C
+	12.2. Wait for temperature to cool below 200C.
+	12.3. Begin run.
+	12.4. Observe behavior of control loop.
+		Measured temperature should settle on 500C during the first 60s, and then stay within a few C of the setpoint during the ramp.
+	12.5. Save data.
+13. Run PID controller with negative temperature ramp (150C/min)
+	13.1. Set parameters:	
+		Max Current = 2 A
+		Max Voltage = 20 V
+		Max Temperature = 800 C
+		Kc = found in test 4
+		Ti =  found in test 5
+		Td = found in test 6
+		Temperature Schedule:	
+			0s, 500 C
+			60s, 500 C
+			120s, 350 C
+	13.2. Wait for temperature to cool below 200C.
+	13.3. Begin run.
+	13.4. Observe behavior of control loop.
+		Measured temperature should settle on 500C during the first 60s, and then stay within a few C of the setpoint during the ramp.
+	13.5. Save data.

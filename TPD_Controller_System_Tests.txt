@@ -1,4 +1,4 @@
-2010.06.23 16:45
+2010.06.25 10:03
 TPD Controller System Tests
 
 1. Check wire connection with sample.
@@ -29,7 +29,7 @@ TPD Controller System Tests
 	3.6. Reconnect power supply to the sample after the run is completed.
 4. Run and tune simple P closed-loop controller.
 	4.1. Set parameters:	
-		Max Current = 2 A
+		Max Current = 3 A
 		Max Voltage = 20 V
 		Max Temperature = 800 C
 		Kc = .002
@@ -50,7 +50,7 @@ TPD Controller System Tests
 	4.6. Repeat test 4, lowering Kc if temperature oscillates, and raising Kc if temperature takes too long to reach setpoint (change Kc by factors of 2).  Find lowest value of Kc at which the system oscillates.  This value divided by 2 is the tuned value of Kc for this setup.
 5. Run and tune PI closed-loop controller.
 	5.1. Set parameters:	
-		Max Current = 2 A
+		Max Current = 3 A
 		Max Voltage = 20 V
 		Max Temperature = 800 C
 		Kc = found in test 4
@@ -70,7 +70,7 @@ TPD Controller System Tests
 	5.7. Repeat entire test, raising Ti if there is oscillation, lowering Ti if the temperature takes too long to reach the setpoint (change Ti by factors of 2).  Find value of Ti that balances overshoot with time taken to reach setpoint.
 6. Run and tune PID closed-loop controller.
 	6.1. Set parameters:	
-		Max Current = 2 A
+		Max Current = 3 A
 		Max Voltage = 20 V
 		Max Temperature = 800 C
 		Kc = found in step 4
@@ -88,7 +88,7 @@ TPD Controller System Tests
 	6.7. Repeat entire test, doubling or halving Td to minimize overshoot and amount of time to reach setpoint.
 7. Run PID controller with positive temperature ramp (50C/min).
 	7.1. Set parameters:	
-		Max Current = 2 A
+		Max Current = 3 A
 		Max Voltage = 20 V
 		Max Temperature = 800 C
 		Kc = found in test 4
@@ -105,7 +105,7 @@ TPD Controller System Tests
 	7.5. Save data.
 8. Run PID controller with positive temperature ramp (100C/min).
 	8.1. Set parameters:	
-		Max Current = 2 A
+		Max Current = 3 A
 		Max Voltage = 20 V
 		Max Temperature = 800 C
 		Kc = found in test 4
@@ -122,7 +122,7 @@ TPD Controller System Tests
 	8.5. Save data.
 9. Run PID controller with positive temperature ramp (200C/min)
 	9.1. Set parameters:	
-		Max Current = 2 A
+		Max Current = 3 A
 		Max Voltage = 20 V
 		Max Temperature = 800 C
 		Kc = found in test 4
@@ -139,7 +139,7 @@ TPD Controller System Tests
 	9.5. Save data.
 10. Run PID controller with positive temperature ramp (300C/min)
 	10.1. Set parameters:	
-		Max Current = 2 A
+		Max Current = 3 A
 		Max Voltage = 20 V
 		Max Temperature = 800 C
 		Kc = found in test 4
@@ -156,7 +156,7 @@ TPD Controller System Tests
 	10.5. Save data.
 11. Run PID controller with negative temperature ramp (50C/min)
 	11.1. Set parameters:	
-		Max Current = 2 A
+		Max Current = 3 A
 		Max Voltage = 20 V
 		Max Temperature = 800 C
 		Kc = found in test 4
@@ -173,7 +173,7 @@ TPD Controller System Tests
 	11.5. Save data.
 12. Run PID controller with negative temperature ramp (100C/min)
 	12.1. Set parameters:	
-		Max Current = 2 A
+		Max Current = 3 A
 		Max Voltage = 20 V
 		Max Temperature = 800 C
 		Kc = found in test 4
@@ -190,7 +190,7 @@ TPD Controller System Tests
 	12.5. Save data.
 13. Run PID controller with negative temperature ramp (150C/min)
 	13.1. Set parameters:	
-		Max Current = 2 A
+		Max Current = 3 A
 		Max Voltage = 20 V
 		Max Temperature = 800 C
 		Kc = found in test 4
@@ -205,3 +205,44 @@ TPD Controller System Tests
 	13.4. Observe behavior of control loop.
 		Measured temperature should settle on 500C during the first 60s, and then stay within a few C of the setpoint during the ramp.
 	13.5. Save data.
+14. Hold at high temperature.
+	14.1. Set parameters:	
+		Max Current = 4 A
+		Max Voltage = 20 V
+		Max Temperature = 1400 C
+		Kc = found in test 4
+		Ti =  found in test 5
+		Td = found in test 6
+		Temperature Schedule:	
+			0s, 500 C
+			60s, 500 C
+			240s, 1200 C
+			360s, 1200 C
+			420s, 500 C
+	14.2. Wait for temperature to cool below 200C.
+	14.3. Begin run.
+	14.4. Observe behavior of control loop.
+		Between 240s and 360s, the temperature should settle on 1200C.
+		There should not be any overtemp.
+	14.5. Save data.
+15. Flash Sample
+	15.1. Set parameters:	
+		Max Current = 4 A
+		Max Voltage = 20 V
+		Max Temperature = 1400 C
+		Kc = found in test 4
+		Ti =  found in test 5
+		Td = found in test 6
+		Temperature Schedule:	
+			0s, 500 C
+			60s, 500 C
+			240s, 1250 C
+			300s, 1250 C
+			330s, 900 C
+			1050s, 700 C
+			1110s, 200 C
+	15.2. Wait for temperature to cool below 200C.
+	15.3. Begin run.
+	15.4. Observe behavior of control loop.
+		The controller should produce an acceptable flash.
+	15.5. Save data.

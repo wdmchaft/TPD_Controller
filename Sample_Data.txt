@@ -1,0 +1,32 @@
+==Experiment Metadata==
+Software Version::TPD Controller
+Data Saved::Thu, Jul 01, 2010 17:01:39
+Sample::
+Experimenter Name::
+Experiment Type::
+Chamber::
+Thermocouple Type::
+Notes::
+
+==Input Parameters==
+Start Time::
+Data Points::0
+Sample Start Temperature (Thermocouple) [C]::NaN
+Current Limit [A]::0.00000
+Temperature Limit [C]::0.00000
+Voltage Limit [V]::0.00000
+
+==PID Gain Schedule==
+Kc	Ti[minutes]	Td[minutes]	MaxTemperature[C]
+12.0000000	0.0000000	0.0000000	0.00
+0.0000000	12.0000000	0.0000000	0.00
+0.0000000	0.0000000	202.0000000	0.00
+0.0000000	0.0000000	2.0000000	0.00
+
+==Temperature Schedule==
+Time[s]	TemperatureSetpoint[C]
+0.00	0.00
+20.00	202.00
+
+==Data==
+DateStamp	ElapsedTime[s]	TemperatureSetpoint[C]	CurrentSetpoint[A]	ThermocoupleTemperature[C]	PyrometerTemperature[C]	MeasuredCurrent[A]	MeasuredVoltage[V]

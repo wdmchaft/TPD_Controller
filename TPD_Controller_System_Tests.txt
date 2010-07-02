@@ -1,4 +1,4 @@
-2010.06.25 10:03
+2010.07.02 13:26
 TPD Controller System Tests
 
 1. Check wire connection with sample.
@@ -18,23 +18,22 @@ TPD Controller System Tests
 		Max Current = 4 A
 		Max Voltage = 4 V
 		Max Temperature = 50 C
-		Kc = .5
-		Ti =  0
-		Td = 0
+		Gain Schedule:
+			Kc = .5, Ti =  0, Td = 0, maxT = 0
 		Temperature Schedule:	
 			0 s, 10 C
 			20 s, 50 C
 	3.4. Begin run
 	3.5. Verify that computer is communicating with DAQ board, temperature controller, and power supply.
 	3.6. Reconnect power supply to the sample after the run is completed.
+	3.7. Reset program.
 4. Run and tune simple P closed-loop controller.
 	4.1. Set parameters:	
 		Max Current = 3 A
 		Max Voltage = 20 V
 		Max Temperature = 800 C
-		Kc = .002
-		Ti =  0
-		Td = 0
+		Gain Schedule:
+			Kc = .002, Ti =  0, Td = 0, maxT = 0 C
 		Temperature Schedule:	
 			0 s, 500 C
 			300 s, 500 C
@@ -48,14 +47,14 @@ TPD Controller System Tests
 	4.5. End run if system equibrilates.
 	4.5. Save data.
 	4.6. Repeat test 4, lowering Kc if temperature oscillates, and raising Kc if temperature takes too long to reach setpoint (change Kc by factors of 2).  Find lowest value of Kc at which the system oscillates.  This value divided by 2 is the tuned value of Kc for this setup.
+	4.7. Reset program.
 5. Run and tune PI closed-loop controller.
 	5.1. Set parameters:	
 		Max Current = 3 A
 		Max Voltage = 20 V
 		Max Temperature = 800 C
-		Kc = found in test 4
-		Ti =  Oscillation period measured in step 4, in minutes
-		Td = 0
+		Gain Schedule:
+			Kc = found in test 4, Ti =  Oscillation period measured in step 4, in minutes, Td = 0, maxT = 0 C
 		Temperature Schedule:	
 			0s, 500 C
 			300s, 500 C
@@ -67,15 +66,15 @@ TPD Controller System Tests
 		The temperature should not overshoot the max temperature.
 	5.5. End run if system equibrilates.
 	5.6. Save data.
-	5.7. Repeat entire test, raising Ti if there is oscillation, lowering Ti if the temperature takes too long to reach the setpoint (change Ti by factors of 2).  Find value of Ti that balances overshoot with time taken to reach setpoint.
+	5.7. Reset program.
+	5.8. Repeat entire test, raising Ti if there is oscillation, lowering Ti if the temperature takes too long to reach the setpoint (change Ti by factors of 2).  Find value of Ti that balances overshoot with time taken to reach setpoint.
 6. Run and tune PID closed-loop controller.
 	6.1. Set parameters:	
 		Max Current = 3 A
 		Max Voltage = 20 V
 		Max Temperature = 800 C
-		Kc = found in step 4
-		Ti =  found in step 5
-		Td = (1/8)Ti
+		Gain Schedule:
+			Kc = found in test 4, Ti =  found in test 5, Td = 1/8 Ti, maxT = 0 C
 		Temperature Schedule:	
 			0s, 500 C
 			300s, 500 C
@@ -85,15 +84,15 @@ TPD Controller System Tests
 		Is the temperature control better or worse than the last run?
 	6.5. End run if system equibrilates.
 	6.6. Save data.
-	6.7. Repeat entire test, doubling or halving Td to minimize overshoot and amount of time to reach setpoint.
+	6.7. Reset program.
+	6.8. Repeat entire test, doubling or halving Td to minimize overshoot and amount of time to reach setpoint.
 7. Run PID controller with positive temperature ramp (50C/min).
 	7.1. Set parameters:	
 		Max Current = 3 A
 		Max Voltage = 20 V
 		Max Temperature = 800 C
-		Kc = found in test 4
-		Ti =  found in test 5
-		Td = found in test 6
+		Gain Schedule:
+			Kc = found in test 4, Ti =  found in test 5, Td = found in test 6, maxT = 0 C
 		Temperature Schedule:	
 			0s, 400 C
 			60s, 400 C
@@ -103,14 +102,14 @@ TPD Controller System Tests
 	7.4. Observe behavior of control loop.
 		Measured temperature should settle on 400C during the first 60s, and then stay within a few C of the setpoint during the ramp.
 	7.5. Save data.
+	7.6. Reset program.
 8. Run PID controller with positive temperature ramp (100C/min).
 	8.1. Set parameters:	
 		Max Current = 3 A
 		Max Voltage = 20 V
 		Max Temperature = 800 C
-		Kc = found in test 4
-		Ti =  found in test 5
-		Td = found in test 6
+		Gain Schedule:
+			Kc = found in test 4, Ti =  found in test 5, Td = found in test 6, maxT = 0 C
 		Temperature Schedule:	
 			0s, 400 C
 			60s, 400 C
@@ -120,14 +119,13 @@ TPD Controller System Tests
 	8.4. Observe behavior of control loop.
 		Measured temperature should settle on 400C during the first 60s, and then stay within a few C of the setpoint during the ramp.
 	8.5. Save data.
+	8.6. Reset program.
 9. Run PID controller with positive temperature ramp (200C/min)
 	9.1. Set parameters:	
 		Max Current = 3 A
 		Max Voltage = 20 V
-		Max Temperature = 800 C
-		Kc = found in test 4
-		Ti =  found in test 5
-		Td = found in test 6
+		Gain Schedule:
+			Kc = found in test 4, Ti =  found in test 5, Td = found in test 6, maxT = 0 C
 		Temperature Schedule:	
 			0s, 300 C
 			60s, 300 C
@@ -137,14 +135,14 @@ TPD Controller System Tests
 	9.4. Observe behavior of control loop.
 		Measured temperature should settle on 400C during the first 60s, and then stay within a few C of the setpoint during the ramp.
 	9.5. Save data.
+	9.6. Reset program.
 10. Run PID controller with positive temperature ramp (300C/min)
 	10.1. Set parameters:	
 		Max Current = 3 A
 		Max Voltage = 20 V
 		Max Temperature = 800 C
-		Kc = found in test 4
-		Ti =  found in test 5
-		Td = found in test 6
+		Gain Schedule:
+			Kc = found in test 4, Ti =  found in test 5, Td = found in test 6, maxT = 0 C
 		Temperature Schedule:	
 			0s, 200 C
 			60s, 200 C
@@ -154,14 +152,14 @@ TPD Controller System Tests
 	10.4. Observe behavior of control loop.
 		Measured temperature should settle on 400C during the first 60s, and then stay within a few C of the setpoint during the ramp.
 	10.5. Save data.
+	10.6. Reset program.
 11. Run PID controller with negative temperature ramp (50C/min)
 	11.1. Set parameters:	
 		Max Current = 3 A
 		Max Voltage = 20 V
 		Max Temperature = 800 C
-		Kc = found in test 4
-		Ti =  found in test 5
-		Td = found in test 6
+		Gain Schedule:
+			Kc = found in test 4, Ti =  found in test 5, Td = found in test 6, maxT = 0 C
 		Temperature Schedule:	
 			0s, 500 C
 			60s, 500 C
@@ -171,14 +169,14 @@ TPD Controller System Tests
 	11.4. Observe behavior of control loop.
 		Measured temperature should settle on 500C during the first 60s, and then stay within a few C of the setpoint during the ramp.
 	11.5. Save data.
+	11.6. Reset program.
 12. Run PID controller with negative temperature ramp (100C/min)
 	12.1. Set parameters:	
 		Max Current = 3 A
 		Max Voltage = 20 V
 		Max Temperature = 800 C
-		Kc = found in test 4
-		Ti =  found in test 5
-		Td = found in test 6
+		Gain Schedule:
+			Kc = found in test 4, Ti =  found in test 5, Td = found in test 6, maxT = 0 C
 		Temperature Schedule:	
 			0s, 500 C
 			60s, 500 C
@@ -188,14 +186,14 @@ TPD Controller System Tests
 	12.4. Observe behavior of control loop.
 		Measured temperature should settle on 500C during the first 60s, and then stay within a few C of the setpoint during the ramp.
 	12.5. Save data.
+	12.6. Reset program.
 13. Run PID controller with negative temperature ramp (150C/min)
 	13.1. Set parameters:	
 		Max Current = 3 A
 		Max Voltage = 20 V
 		Max Temperature = 800 C
-		Kc = found in test 4
-		Ti =  found in test 5
-		Td = found in test 6
+		Gain Schedule:
+			Kc = found in test 4, Ti =  found in test 5, Td = found in test 6, maxT = 0 C
 		Temperature Schedule:	
 			0s, 500 C
 			60s, 500 C
@@ -205,44 +203,41 @@ TPD Controller System Tests
 	13.4. Observe behavior of control loop.
 		Measured temperature should settle on 500C during the first 60s, and then stay within a few C of the setpoint during the ramp.
 	13.5. Save data.
-14. Hold at high temperature.
+	13.6. Reset program.
+14. Test Gain Schedule (gain as function of sample temperature)
 	14.1. Set parameters:	
-		Max Current = 4 A
+		Max Current = 3 A
 		Max Voltage = 20 V
-		Max Temperature = 1400 C
-		Kc = found in test 4
-		Ti =  found in test 5
-		Td = found in test 6
+		Max Temperature = 800 C
+		Gain Schedule:
+			Kc = found in test 4, Ti =  found in test 5, Td = found in test 6, maxT = 400 C
+			Kc = 0.1, Ti = 0.1, Td = 0, maxT = 700 C
 		Temperature Schedule:	
 			0s, 500 C
-			60s, 500 C
-			240s, 1200 C
-			360s, 1200 C
-			420s, 500 C
-	14.2. Wait for temperature to cool below 200C.
-	14.3. Begin run.
-	14.4. Observe behavior of control loop.
-		Between 240s and 360s, the temperature should settle on 1200C.
-		There should not be any overtemp.
+			120s, 500 C
+	14.2. Wait for temperature to cool below 200 C.
+	14.3 Begin run.
+	14.4. Observe behaivior of control loop.
+		Temperature should rise normally until it hits 400 C, at which point it should begin oscillating erratically.
 	14.5. Save data.
-15. Flash Sample
+	14.6. Reset program.
+15. Test Gain Schedule on High-Temperature Ramp
 	15.1. Set parameters:	
-		Max Current = 4 A
+		Max Current = 12 A
 		Max Voltage = 20 V
-		Max Temperature = 1400 C
-		Kc = found in test 4
-		Ti =  found in test 5
-		Td = found in test 6
+		Max Temperature = 1200 C
+		Gain Schedule:
+			Kc = found in test 4, Ti =  found in test 5, Td = found in test 6, maxT = 600 C
+			Kc = 2*(found in test 4), Ti = found in test 5, Td = found in test 6, maxT = 1200 C
 		Temperature Schedule:	
 			0s, 500 C
-			60s, 500 C
-			240s, 1250 C
-			300s, 1250 C
-			330s, 900 C
-			1050s, 700 C
-			1110s, 200 C
-	15.2. Wait for temperature to cool below 200C.
+			120s, 500 C
+			300 s, 1100 C
+			360 s, 1100 C
+			420 s, 500 C
+	15.2. Wait for sample to cool below 200 C.
 	15.3. Begin run.
-	15.4. Observe behavior of control loop.
-		The controller should produce an acceptable flash.
+	15.4. Observe behaivior of control loop.
+		Temperature should be able to follow the setpoint all the way up to 1100 C.
 	15.5. Save data.
+	15.6. Reset program.

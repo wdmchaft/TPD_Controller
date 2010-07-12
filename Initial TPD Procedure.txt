@@ -1,0 +1,37 @@
+Initial TPD Procedure
+H on Si(100)
+2010.07.06 12:50
+1. TPD on bare Si(100) with clean chamber.
+1.1. Flash Si sample to 1200C.
+1.2. TPD
+2. TPD on clean Si(100) with chamber exposed to atomic H.
+2.1. Flash sample.
+2.2. Remove sample from chamber.
+2.3. Expose chamber to atomic H.
+2.4. Put sample back in chamber.
+2.5. TPD
+3. TPD on hydrogen-pacified Si(100) sample.
+3.1. Flash Si sample
+3.2. Expose to atomic H
+3.3. TPD
+TPD Procedure:
+1. Verify that TPD_Controller.vi is communicating properly with instruments (only on first run since program was started, sample should be disconnected from power supply).
+1.1. Lakeshore temperature controller
+1.2. Kepco power supply
+1.3. Mikron pyrometer
+2. Input controller parameters/metadata.
+2.1. Metadata (all self-explanatory)
+2.2. Maximum values
+2.2.1. Maximum Current = 4 A
+2.2.2. Maximum voltage = 20 V
+2.2.3. Maximum temperature = 800 C
+2.3. Temperature Schedule
+2.3.1.    350C, 0s
+2.3.2.    350C, 40s
+2.3.3.    650C, 190s
+2.4. Gain Schedule
+2.4.1.    Kc = .003, Ti = .1, Td = .001, max Temp = 0C
+2.4.2.    PID calculates current
+3. Begin recording RGA data.
+4. Start temperature ramp.
+5. Save temperature and RGA data after experiment finishes.

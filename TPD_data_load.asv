@@ -7,6 +7,24 @@
 clear date time tempSet currentSet temp pyroTemp current voltage...
     resistance power;
 
-%Import text file and calculate number of entries.
+%Import text file.
 filename = uigetfile('.txt');
-rawdata = textread(filename,'%s',
+[date, time, tempSet, currentSet, temp, pyroTemp, current, voltage, ...
+    resistance] = textread(filename,'%s %f %f %f %f %f %f %f %f',-1,...
+    'headerlines',30, 'delimiter', '\t');
+
+%Calculate power.
+power = voltage.*current;
+
+hl1 = (time, temp, 
+
+
+
+%plot data
+plot(time, temp, 'r-', time, tempSet, 'g-');
+title('Temperature v. Time');
+xlabel('Time [s]');
+ylabel('Temperature [C]');
+legend('Measured Temperature', 'Temperature Setpoint', 'location',...
+    'northeast');
+whitebg('white');

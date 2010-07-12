@@ -17,4 +17,10 @@ filename = uigetfile('.txt');
 power = voltage.*current;
 
 %plot data
-plot(time, temp, 'r-', time, tempSet, 'g-', time, current, 'y-')
+plot(time, temp, 'r-', time, tempSet, 'g-');
+title('Temperature v. Time');
+xlabel('Time [s]');
+ylabel('Temperature [C]');
+legend('Measured Temperature', 'Temperature Setpoint', 'location',...
+    'northeast');
+whitebg('white');

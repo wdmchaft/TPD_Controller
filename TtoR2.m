@@ -2,12 +2,13 @@
 %Calculates R^2 from T for Si sample.
 
 function [R2] = TtoR2(T)
-if T < 450
-    R = .001762*T+2.661;
-elseif T < 492
-    R = 3.453;
+if T < 530
+    R = 7.470;
+elseif T < 810
+    R = -.01371*T+15.01;
 else
-    R = -3.822e-5*T^2+.03762*T-5.804;
+    R = 3.905;
 end
+
 R2 = R^2;
 end

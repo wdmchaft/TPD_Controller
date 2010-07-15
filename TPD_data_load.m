@@ -11,16 +11,17 @@ clear date time tempSet currentSet temp pyroTemp current voltage...
 filename = uigetfile('.txt');
 [date, time, tempSet, currentSet, temp, pyroTemp, current, voltage, ...
     resistance] = textread(filename,'%s %f %f %f %f %f %f %f %f',-1,...
-    'headerlines',30, 'delimiter', '\t');
+    'headerlines',31, 'delimiter', '\t');
 
 %Calculate power.
 power = voltage.*current;
 
 %plot data
-plot(time, temp, 'r-', time, tempSet, 'g-');
+plot(time, temp, 'r-', time, pyroTemp, 'b-', time, tempSet, 'g-');
 title('Temperature v. Time');
 xlabel('Time [s]');
 ylabel('Temperature [C]');
-legend('Measured Temperature', 'Temperature Setpoint', 'location',...
-    'northeast');
+legend('Measured Temperature (Thermocouple)', ...
+    'Measured Temperature(Pyrometer)', 'Temperature Setpoint', 'location',...
+    'southeast');
 whitebg('white');

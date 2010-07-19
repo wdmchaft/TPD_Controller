@@ -5,26 +5,43 @@
 
 %clear variables
 clear date time tempSet currentSet temp pyroTemp current voltage...
-    resistance power;
+    resistance power line;
+stop = 0;
+header = 'DateStamp	ElapsedTime[s]	TemperatureSetpoint[C]	CurrentSetpoint[A]	ThermocoupleTemperature[C]	PyrometerTemperature[C]	MeasuredCurrent[A]	MeasuredVoltage[V]	MeasuredResistance[ohms]';
 
 %Import text file.
 filename = uigetfile('.txt');
-[date, time, tempSet, currentSet, temp, pyroTemp, current, voltage, ...
-    resistance] = textread(filename,'%s %f %f %f %f %f %f %f %f',-1,...
-    'headerlines',30, 'delimiter', '\t');
+fid = fopen(filename, 'rt');
+
+%get to the data in the text file
+while (stop == 0) 
+    line = fgetl(fid);
+    if length(line) == length(header)
+        stop = 1;
+    end
+end
+
+i = 0;
+while 1
+    line = fgetl(fid);
+    if line == -1
+        break;
+    end
+    [date(i), time(i), tempSet(i), currentSet(i), temp(i), pyroTemp(i), 
+    current(i), voltage, ...
+    resistance] = strread(line, '%s %f %f %f %f %f %f %f %f', ...
+    'delimiter', '\t');
+end
 
 %Calculate power.
 power = voltage.*current;
 
-hl1 = (time, temp, 
-
-
-
 %plot data
-plot(time, temp, 'r-', time, tempSet, 'g-');
+plot(time, temp, 'r-', time, pyroTemp, 'b-', time, tempSet, 'g-');
 title('Temperature v. Time');
 xlabel('Time [s]');
 ylabel('Temperature [C]');
-legend('Measured Temperature', 'Temperature Setpoint', 'location',...
-    'northeast');
+legend('Measured Temperature (Thermocouple)', ...
+    'Measured Temperature(Pyrometer)', 'Temperature Setpoint', 'location',...
+    'southeast');
 whitebg('white');

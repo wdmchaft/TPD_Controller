@@ -39,13 +39,17 @@ power = voltage.*current;
 
 %plot data
 plot(time, temp, 'r-', time, tempSet, 'g-','linewidth', 1.5);
-%hold all;
-%plot(time, tempSet, 'g-');
-title('Kp = 0.002');
-xlabel('Time [s]');
-ylabel('Temperature [C]');
-legend('Measured Temperature (Thermocouple)', 'Temperature Setpoint', 'location',...
+axis ([0 60 0 550]);
+grid on;
+h_title = title('Kp = 0.002');
+h_xlabel = xlabel('Time [s]');
+h_ylabel = ylabel('Temperature [C]');
+h_legend = legend('Measured Temperature (Thermocouple)', 'Temperature Setpoint', 'location',...
     'southeast');
+set(h_title, 'FontSize', 14);
+set(h_xlabel, 'FontSize', 12);
+set(h_ylabel, 'FontSize', 12);
+set(h_legend, 'FontSize', 12);
 whitebg('white');
 
 fclose(fid);

@@ -38,12 +38,13 @@ end
 power = voltage.*current;
 
 %plot data
-plot(time, temp, 'r-', time, pyroTemp, 'b-', time, tempSet, 'g-');
-title('Temperature v. Time');
+plot(time, temp, 'r-', time, tempSet, 'g-','linewidth', 1.5);
+%hold all;
+%plot(time, tempSet, 'g-');
+title('Kp = 0.002');
 xlabel('Time [s]');
 ylabel('Temperature [C]');
-legend('Measured Temperature (Thermocouple)', ...
-    'Measured Temperature(Pyrometer)', 'Temperature Setpoint', 'location',...
+legend('Measured Temperature (Thermocouple)', 'Temperature Setpoint', 'location',...
     'southeast');
 whitebg('white');
 

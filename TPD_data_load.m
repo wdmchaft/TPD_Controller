@@ -39,9 +39,9 @@ power = voltage.*current;
 
 %plot data
 plot(time, temp, 'r-', time, tempSet, 'g-','linewidth', 1.5);
-axis ([0 60 0 750]);
+axis ([0 210 0 800]);
 grid on;
-h_title = title('Kp = 0.015');
+h_title = title('TPD Temperature Schedule');
 h_xlabel = xlabel('Time [s]');
 h_ylabel = ylabel('Temperature [C]');
 h_legend = legend('Measured Temperature (Thermocouple)', 'Temperature Setpoint', 'location',...

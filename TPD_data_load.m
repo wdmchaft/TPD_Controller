@@ -38,7 +38,7 @@ power = voltage.*current;
 
 %plot data
 plot(time, temp, 'r-', time, tempSet, 'g-',time, pyroTemp, 'b-', 'linewidth', 1.5);
-axis ([0 500 0 700]);
+axis ([0 170 0 800]);
 grid on;
 h_title = title('TPD Temperature Schedule');
 h_xlabel = xlabel('Time [s]');

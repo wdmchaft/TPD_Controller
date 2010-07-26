@@ -5,7 +5,7 @@
 %length as the data header line.
 
 %clear variables
-clear all;
+clear header date time tempSet currentSet temp pyroTemp current voltage resistance power;
 stop = 0;
 header = 'DateStamp	ElapsedTime[s]	TemperatureSetpoint[C]	CurrentSetpoint[A]	ThermocoupleTemperature[C]	PyrometerTemperature[C]	MeasuredCurrent[A]	MeasuredVoltage[V]	MeasuredResistance[ohms]';
 

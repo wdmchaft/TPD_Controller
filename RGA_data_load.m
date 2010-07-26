@@ -2,10 +2,10 @@
 %Christopher Heidelberger
 %parses RGA data and stores as 1-D arrays in MATLAB
 
-clear header
+clear header fid rgaDate rgaTime rgaOffset H2 H2o N2 Si2H6 He H1
 
 %Import text file.
-filename = uigetfile('.txt');
+filename = uigetfile('.csv');
 fid = fopen(filename, 'rt');
 
 header = fgetl(fid);
@@ -22,3 +22,5 @@ while 1
         strread(line, '%s %s %f %f %f %f %f %f %f', 'delimiter', ',');
     i = i + 1;
 end
+
+fclose(fid);

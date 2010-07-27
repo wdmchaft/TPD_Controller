@@ -6,7 +6,7 @@ Experimenter Name::CHeidelberger
 Experiment Type::TPD
 Chamber::Prep
 Thermocouple Type::K
-Notes::Pyrometer Temperature Measure only. TPD, H on Si
+Notes::Pyrometer Temperature Measure only. TPD, H on Si, control
 
 ==Hardware Parameters==
 Start Time::Mon, Jul 26, 2010 13:43:06

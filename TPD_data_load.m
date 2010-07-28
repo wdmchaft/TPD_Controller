@@ -5,7 +5,7 @@
 %length as the data header line.
 
 %clear variables
-clear header date time tempSet currentSet temp pyroTemp current voltage resistance power;
+clear header date time tempSet currentSet temp pyroTemp current voltage resistance stageTemp power;
 stop = 0;
 header = 'DateStamp	ElapsedTime[s]	TemperatureSetpoint[C]	CurrentSetpoint[A]	ThermocoupleTemperature[C]	PyrometerTemperature[C]	MeasuredCurrent[A]	MeasuredVoltage[V]	MeasuredResistance[ohms]';
 
@@ -16,10 +16,13 @@ fid = fopen(filename, 'rt');
 %get to the data in the text file
 while (stop == 0) 
     line = fgetl(fid);
-    if length(line) == length(header)
+    if strcmp('==Data==',line)
         stop = 1;
     end
 end
+
+%skip data header line
+fgetl(fid);
 
 %parse data
 i = 1;
@@ -29,8 +32,8 @@ while 1
         break;
     end
     [date(i), time(i), tempSet(i), currentSet(i), temp(i), pyroTemp(i), ...
-    current(i), voltage(i), resistance(i)] = strread(line, ...
-    '%s %f %f %f %f %f %f %f %f', 'delimiter', '\t');
+    current(i), voltage(i), resistance(i), stageTemp(i)] = strread(line, ...
+    '%s %f %f %f %f %f %f %f %f %f', 'delimiter', '\t');
     i = i + 1;
 end
 

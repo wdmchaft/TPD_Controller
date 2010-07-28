@@ -3,7 +3,7 @@
 %Plots TPD data.  User must enter variable names manually before running
 %script.
 
-plot(rgaTemp,H2Range,'linewidth', 1.5);
+plot(rgaTemp,H2Shift,'linewidth', 1.5);
 grid on;
 h_title = title('TPD: H on Si, Control (Bare Si)');
 h_xlabel = xlabel('Temperature [C]');

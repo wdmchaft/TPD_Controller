@@ -8,7 +8,7 @@ grid on;
 h_title = title('TPD: H on Si, Control (Bare Si)');
 h_xlabel = xlabel('Temperature [C]');
 h_ylabel = ylabel('Partial Pressure [torr]');
-h_legend = legend('Hydrogen (H2)','northeast');
+h_legend = legend('Hydrogen (H2)','location','northeast');
 set(h_title, 'FontSize', 18);
 set(h_xlabel, 'FontSize', 15);
 set(h_ylabel, 'FontSize', 15);

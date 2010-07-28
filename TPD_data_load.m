@@ -41,13 +41,13 @@ end
 power = voltage.*current;
 
 %plot data
-plot(time, temp, 'r-', time, tempSet, 'g-',time, pyroTemp, 'b-', 'linewidth', 1.5);
-axis ([0 170 0 800]);
+plot(time, tempSet, 'g-',time, pyroTemp, 'r-', 'linewidth', 1.5);
+%axis ([0 170 0 800]);
 grid on;
 h_title = title('TPD Temperature Schedule');
 h_xlabel = xlabel('Time [s]');
 h_ylabel = ylabel('Temperature [C]');
-h_legend = legend('Measured Temperature (Thermocouple)', 'Temperature Setpoint', 'Measured Temeprature (Pyrometer)', 'location',...
+h_legend = legend('Temperature Setpoint', 'Measured Temeprature (Pyrometer)', 'location',...
     'southeast');
 set(h_title, 'FontSize', 18);
 set(h_xlabel, 'FontSize', 15);

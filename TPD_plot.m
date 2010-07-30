@@ -5,7 +5,7 @@
 
 plot(rgaTemp,H2Shift,'linewidth', 1.5);
 grid on;
-h_title = title('TPD: H on Si, Control (Bare Si)');
+h_title = title('TPD: H on Si');
 h_xlabel = xlabel('Temperature [C]');
 h_ylabel = ylabel('Partial Pressure [torr]');
 h_legend = legend('Hydrogen (H2)','location','northeast');
